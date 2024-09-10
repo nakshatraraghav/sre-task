@@ -1,0 +1,17 @@
+# config.alloy
+
+prometheus.exporter.unix "local_system" {
+  # Exporter that provides basic Unix system metrics
+}
+
+prometheus.scrape "alloy_scrape" {
+  targets = prometheus.exporter.unix.local_system.targets
+  forward_to = [prometheus.remote_write.default_receiver]
+  scrape_interval = "10s"
+}
+
+prometheus.remote_write "default_receiver" {
+  endpoint {
+    url = "http://localhost:9090/api/v1/write"
+  }
+}

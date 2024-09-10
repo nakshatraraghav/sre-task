@@ -1,0 +1,24 @@
+---
+# tasks file for alloy
+- name: create grafana alloy config directory in home directory
+  file:
+    path: /home/ec2-user/config
+    state: directory
+
+- name: copy grafana alloy config to home directory
+  copy:
+    src: config.alloy
+    dest: /home/ec2-user/config/config.alloy
+
+- name: run grafana alloy docker container with volume attached
+  docker_container:
+    name: grafana_alloy
+    image: grafana/alloy
+    state: started
+    ports:
+      - "12345:12345"
+    volumes:
+      - "/home/ec2-user/config/config.alloy:/etc/alloy/config.alloy"
+    command: >
+      run --server.http.listen-addr=0.0.0.0:12345 --storage.path=/var/lib/alloy/data /etc/alloy/config.alloy
+    restart_policy: always
