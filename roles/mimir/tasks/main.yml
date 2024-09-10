@@ -1,0 +1,21 @@
+---
+- name: Create mimir config directory in home directory
+  file:
+    path: /home/ec2-user/config
+    state: directory
+
+- name: Copy mimir config file to home directory
+  copy:
+    src: mimir.yml
+    dest: /home/ec2-user/config/mimir.yml
+
+- name: Run mimir docker container with volume attached
+  docker_container:
+    name: mimir
+    image: grafana/mimir:latest
+    state: started
+    ports:
+      - "9009:9009"
+    volumes:
+      - "/home/ec2-user/config/mimir.yml:/etc/mimir/mimir.yml"
+    restart_policy: always

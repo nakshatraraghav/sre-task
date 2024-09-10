@@ -1,0 +1,17 @@
+server:
+  http_listen_port: 9009
+
+blocks_storage:
+  tsdb:
+    dir: /var/lib/mimir/tsdb
+
+  bucket_store:
+    sync_dir: /var/lib/mimir/bucket_store
+    bucket:
+      type: filesystem
+      config:
+        directory: /var/lib/mimir/blocks
+
+ingester:
+  wal:
+    dir: /var/lib/mimir/wal
