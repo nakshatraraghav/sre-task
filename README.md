@@ -71,6 +71,7 @@ For this project, three EC2 `t2.micro` instances have been provisioned on AWS. T
      ```
 
 ## Project Structure
+```bash
 ├──  assign-task
 │  ├──  file.json
 │  ├──  proof.png
@@ -134,6 +135,7 @@ For this project, three EC2 `t2.micro` instances have been provisioned on AWS. T
 │     └──  tasks
 │        └──  main.yml
 └──  script.sh
+```
 
 ## Ansible Roles
 
