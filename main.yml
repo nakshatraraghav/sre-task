@@ -1,7 +1,10 @@
 ---
-- name: run echo hello world
-  hosts: aws
+- hosts: aws
 
-  tasks:
-    - name: echo hello world
-      shell: echo "hello, world"
+  roles:
+    - ignite
+    - dependencies
+    - alloy
+    - prometheus
+    - mimir
+    - grafana
