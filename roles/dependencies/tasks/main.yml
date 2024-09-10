@@ -5,3 +5,25 @@
   dnf:
     name: go
     state: latest
+
+- name: install docker
+  become: yes
+  dnf:
+    name: docker
+    state: present
+
+- name: install pip for python
+  become: yes
+  dnf:
+    name: python3-pip
+    state: present
+
+- name: install docker-compose using pip
+  pip:
+    name: docker-compose
+
+- name: start docker service
+  become: yes
+  service:
+    name: docker
+    state: started
