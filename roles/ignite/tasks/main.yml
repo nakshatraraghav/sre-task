@@ -1,0 +1,11 @@
+---
+# tasks file for ignite
+- name: install ignite cli
+  become: yes
+  shell: curl https://get.ignite.com/cli! | bash
+
+- name: scaffold a local blockchain
+  become: no
+  shell: ignite scaffold chain example
+  args:
+    chdir: "~" 
