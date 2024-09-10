@@ -1,0 +1,7 @@
+---
+# tasks file for dependencies
+- name: install golang
+  become: yes
+  dnf:
+    name: go
+    state: latest
