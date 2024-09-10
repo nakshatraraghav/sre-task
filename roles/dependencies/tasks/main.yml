@@ -27,3 +27,10 @@
   service:
     name: docker
     state: started
+
+- name: add current user to docker group
+  become: yes
+  user:
+    name: "ec2-user"
+    groups: docker
+    append: yes
