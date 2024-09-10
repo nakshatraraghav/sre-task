@@ -1,0 +1,21 @@
+---
+- name: Create prometheus config directory in home directory
+  file:
+    path: /home/ec2-user/config
+    state: directory
+
+- name: Copy prometheus config file to home directory
+  copy:
+    src: prometheus.yml
+    dest: /home/ec2-user/config/prometheus.yml
+
+- name: Run prometheus docker container with volume attached
+  docker_container:
+    name: prometheus
+    image: prom/prometheus:latest
+    state: started
+    ports:
+      - "9090:9090"
+    volumes:
+      - "/home/ec2-user/config/prometheus.yml:/etc/prometheus/prometheus.yml"
+    restart_policy: always
